@@ -2,15 +2,15 @@
 
 R1 = PetName (PetType, PetBreed, PetDOB, OwnersLastName, OwnersFirstName, OwnerPhone, OwnerEmail, Service, Date, Charge)
 
-# Norm 2 PrimaryKey OwnerLastName
+# Norm 2 PrimaryKey Found
  
-R12a = PetName (PetType, PetBreed, PetDOB, **OwnersLastName**, OwnersFirstName, OwnerPhone, OwnerEmail, **Service**, Date, Charge)
+R12a = **PetName** (PetType, PetBreed, PetDOB, **OwnersLastName**, OwnersFirstName, OwnerPhone, OwnerEmail, **Service**, Date, Charge)
 
 R12b = PetName (PetType, PetBreed, PetDOB,PetID) | 
 OwnersLastNAme(OwnersFirstName, OwnerPhone, OwnerEmail,OwnerID)
 Service (Date, Charge,ServiceID)
 
-# Norm 3 IDs Created along with ID Relations
+# Norm 3 ID Relations
 
 R13b = PetName (PetID, PetType, PetBreed, PetDOB)  | 
 OwnersLastName(OwnerID, OwnersFirstName, OwnerPhone, OwnerEmail, PetID)   | 
