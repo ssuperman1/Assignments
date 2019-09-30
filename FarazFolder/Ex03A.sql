@@ -1,3 +1,5 @@
+/* These Are my Create Statements */
+
 CREATE TABLE DEPARTMENT(
 	DepartmentName Char(35) NOT NULL,
 	BudgetCode Char(30) NOT NULL,
