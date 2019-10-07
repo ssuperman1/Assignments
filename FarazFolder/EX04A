@@ -1,0 +1,284 @@
+/* Query-CH03-XY by Faraz G and Frank A */
+
+/* *** SQL-Query-CH03-01 *** */
+Select ProjectID, ProjectName, DEPARTMENT, MaxHours, StartDate, EndDate
+From PROJECT;
+
+/* *** SQL-Query-CH03-02 *** */
+Select *
+From PROJECT;
+
+/* *** SQL-Query-CH03-03 *** */
+Select ProjectName, DEPARTMENT, MaxHours
+From PROJECT;
+
+/* *** SQL-Query-CH03-04 *** */
+Select ProjectName, MaxHours, DEPARTMENT
+From PROJECT;
+
+/* *** SQL-Query-CH03-05 *** */
+Select DEPARTMENT
+From PROJECT;
+
+/* *** SQL-Query-CH03-06 *** */
+Select DISTINCT DEPARTMENT
+From PROJECT;
+
+/* *** SQL-Query-CH03-07 *** */
+Select *
+From PROJECT
+Where DEPARTMENT = 'Finance';
+
+/* *** SQL-Query-CH03-08 *** */
+Select *
+From PROJECT
+Where StartDate = '05/10/2017';
+
+/* *** SQL-Query-CH03-09 *** */
+Select *
+From PROJECT
+Where MaxHours > 135;
+
+/* *** SQL-Query-CH03-10 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where DEPARTMENT= 'Accounting';
+
+/* ***SQL-Query-CH03-11 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Order By DEPARTMENT;
+
+/* ***SQL-Query-CH03-12 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Order by DEPARTMENT DESC;
+
+/* *** SQL-Query-CH03-13 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Order By DEPARTMENT DESC, LastName ASC;
+
+/* *** SQL-Query-CH03-14 *** */
+SELECT FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where DEPARTMENT = 'Accounting'
+    And OfficePhone = '360-285-8430';
+
+/* *** SQL-Query-CH03-15 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where DEPARTMENT = 'Accounting'
+    Or OfficePhone = '360-285-8410';
+
+/* *** SQL-Query-CH03-16 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where DEPARTMENT = 'Accounting'
+    AND NOT OfficePhone = '360-285-8430';
+
+/* *** SQL-Query-CH03-17 *** */
+SELECT FirstName, LastName, DEPARTMENT, OfficePhone
+FROM EMPLOYEE
+WHERE DEPARTMENT IN ('Administration', 'Finance', 'Accounting');
+
+/* *** SQL-Query-CH03-18 *** */
+SELECT FirstName, LastName, DEPARTMENT, OfficePhone
+FROM EMPLOYEE
+WHERE DEPARTMENT NOT IN ('Administration', 'Finance', 'Accounting');
+
+/* *** SQL-Query-CH03-19 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where EmployeeNumber >= 2
+  And EmployeeNumber <= 5;
+
+/* *** SQL-Query-CH03-20 *** */
+SELECT FirstName, LastName, DEPARTMENT, OfficePhone
+FROM EMPLOYEE
+WHERE EmployeeNumber BETWEEN 2 AND 5;
+
+/* *** SQL-Query-CH03-21 *** */
+Select *
+From PROJECT
+Where ProjectName LIKE '2017 Q_ Portfolio Analysis';
+
+/* *** SQL-Query-CH03-22 *** */
+Select *
+From EMPLOYEE
+Where OfficePhone LIKE '360-287-88__';
+
+/* *** SQL-Query-CH03-23 *** */
+SELECT *
+FROM EMPLOYEE
+WHERE OfficePhone LIKE '360-287-88%';
+
+/* *** SQL-Query-CH03-24 *** */
+SELECT *
+FROM EMPLOYEE
+WHERE DEPARTMENT LIKE '%ing';
+
+/* *** SQL-Query-CH03-25 *** */
+SELECT *
+FROM EMPLOYEE
+WHERE DEPARTMENT NOT LIKE '%ing';
+
+/* *** SQL-Query-CH03-26 *** */
+Select FirstName, LastName, DEPARTMENT, OfficePhone
+From EMPLOYEE
+Where OfficePhone IS NULL;
+
+-- SQL-QUERY-CH03-27
+SELECT	FirstName, LastName, DEPARTMENT, OfficePhone
+FROM EMPLOYEE
+WHERE OfficePhone IS NOT NULL;
+
+-- SQL-QUERY-CH03-28
+SELECT COUNT(*)
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-29
+SELECT COUNT(*) AS NumberOfPROJECTs
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-30
+SELECT COUNT(DEPARTMENT) AS NumberOfDEPARTMENTs
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-31
+SELECT COUNT(DISTINCT DEPARTMENT) AS NumberOfDEPARTMENTs
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-32
+SELECT SUM(MaxHours) AS TotalMaxHours,
+	   AVG(MaxHours) AS AverageMaxHours,
+	   MIN(MaxHours) AS MinimumMaxHours,
+	   MAX(MaxHours) AS MaximumMaxHours
+FROM PROJECT
+WHERE ProjectID <= 1200;
+
+-- SQL-QUERY-CH03-33
+SELECT ProjectName, COUNT(*)
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-35
+SELECT ProjectID, ProjectName, MaxHours, (24.50 * MaxHours) AS MaxPROJECTCost
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-36
+SELECT DEPARTMENT, Count(*) AS NumberOfEMPLOYEEs
+FROM EMPLOYEE
+GROUP BY DEPARTMENT;
+
+-- SQL-QUERY-CH03-37
+SELECT DEPARTMENT, COUNT(*) AS NumberOfEMPLOYEEs
+FROM EMPLOYEE
+GROUP BY DEPARTMENT
+HAVING COUNT(*) > 1;
+
+-- SQL-QUERY-CH03-38
+SELECT DEPARTMENT, COUNT(*) AS NumberOfEMPLOYEEs
+FROM EMPLOYEE
+WHERE EmployeeNumber <= 10
+GROUP BY DEPARTMENT
+HAVING COUNT(*) > 1;
+
+-- SQL-QUERY-CH03-39
+SELECT FirstName, LastName
+FROM EMPLOYEE
+WHERE EmployeeNumber IN (6, 10, 11, 16, 17);
+
+-- SQL-QUERY-CH03-40
+SELECT EmployeeNumber
+FROM ASSIGNMENT
+WHERE HoursWorked > 50;
+
+-- SQL-QUERY-CH03-41
+SELECT FirstName, LastName
+FROM EMPLOYEE
+WHERE EmployeeNumber IN
+		(SELECT DISTINCT EmployeeNumber
+		 FROM ASSIGNMENT
+		 WHERE HoursWorked > 50);
+
+-- SQL-QUERY-CH03-42
+SELECT DISTINCT ProjectID
+FROM PROJECT
+WHERE DEPARTMENT = 'Accounting';
+
+-- SQL-QUERY-CH03-43
+SELECT DISTINCT EmployeeNumber
+FROM ASSIGNMENT
+WHERE HoursWorked > 40
+	AND ProjectID IN
+	( SELECT ProjectID
+	FROM PROJECT
+	WHERE DEPARTMENT = 'Accounting');
+
+-- SQL-QUERY-CH03-44
+SELECT FirstName, LastName
+FROM EMPLOYEE
+WHERE EmployeeNumber IN
+	( SELECT DISTINCT EmployeeNumber
+	FROM ASSIGNMENT
+	WHERE HoursWorked > 40
+		AND ProjectID IN
+			( SELECT ProjectID
+			FROM PROJECT
+			WHERE DEPARTMENT = 'Accounting'));
+
+-- SQL-QUERY-CH03-45
+SELECT FirstName, LastName, ProjectID, HoursWorked
+FROM EMPLOYEE, ASSIGNMENT;
+
+-- SQL-QUERY-CH03-46
+SELECT FirstName, LastName, ProjectID, HoursWorked
+FROM EMPLOYEE, ASSIGNMENT
+WHERE EMPLOYEE.EmployeeNumber = ASSIGNMENT.EmployeeNumber;
+
+-- SQL-QUERY-CH03-47
+SELECT FirstName, LastName, ProjectID, HoursWorked
+FROM EMPLOYEE, ASSIGNMENT
+WHERE EMPLOYEE.EmployeeNumber = ASSIGNMENT.EmployeeNumber
+ORDER BY EMPLOYEE.EmployeeNumber, ProjectID;
+
+-- SQL-QUERY-CH03-48
+SELECT FirstName, LastName, ProjectID, HoursWorked
+FROM EMPLOYEE JOIN ASSIGNMENT
+	ON EMPLOYEE.EmployeeNumber = ASSIGNMENT.EmployeeNumber
+ORDER BY EMPLOYEE.EmployeeNumber, ProjectID;
+
+-- SQL-QUERY-CH03-49
+SELECT FirstName, LastName, SUM(HoursWorked) AS TotalHoursWorked
+FROM EMPLOYEE AS E JOIN ASSIGNMENT AS A
+	ON E.EmployeeNumber = A.EmployeeNumber
+GROUP BY LastName, FirstName
+ORDER BY LastName, FirstName;
+
+-- SQL-QUERY-CH03-50
+SELECT FirstName, LastName, ProjectID, HoursWorked
+FROM EMPLOYEE as E JOIN ASSIGNMENT AS A
+	ON E.EmployeeNumber = A.EmployeeNumber
+WHERE HoursWorked > 50
+ORDER BY LastName, FirstName, ProjectID;
+
+-- SQL-QUERY-CH03-51
+SELECT ProjectName, FirstName, LastName, HoursWorked
+FROM EMPLOYEE as E JOIN ASSIGNMENT AS A
+	ON E.EmployeeNumber = A.EmployeeNumber
+		JOIN PROJECT AS P
+			ON A.ProjectID = P.ProjectID
+ORDER BY P.ProjectID, A.EmployeeNumber;
+
+-- SQL-QUERY-CH03-52
+SELECT *
+FROM PROJECT;
+
+-- SQL-QUERY-CH03-53
+SELECT ProjectName, FirstName, LastName, HoursWorked
+FROM EMPLOYEE as E JOIN ASSIGNMENT AS A
+	ON E.EmployeeNumber = A.EmployeeNumber
+		JOIN PROJECT AS P
+			ON A.ProjectID = P.ProjectID
+ORDER BY P.ProjectID, A.EmployeeNumber;
+	
